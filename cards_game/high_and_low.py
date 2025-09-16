@@ -64,10 +64,14 @@ if "deck" not in st.session_state:
     st.session_state.next = None
     st.session_state.money = init_money
     st.session_state.message = "High or Low ?"
+    st.session_state.pre_bet = 10
 
 
 # --------- UI ---------
-st.title("🃏 High and Low Game !!!")
+st.title("🃏 High and Low Game!!")
+st.write("カードの数字が次に出るカードより高いか低いかを当ててください。")
+st.write("Aは最も高く、2が最も低いです。")
+st.write("掛け金を設定し、当たれば掛け金の2倍、外れれば掛け金を失います。")
 
 col1, col2 = st.columns(2)
 col1.image(st.session_state.cards[st.session_state.current], caption="現在のカード")
@@ -83,8 +87,8 @@ st.markdown(f"### 所持金: {st.session_state.money} 円")
 if st.session_state.money <= 0:
     st.error("💥 所持金がなくなりました！ゲームオーバー")
     st.stop()
-    
-bet = st.number_input("掛け金を設定してください", min_value=1, max_value=st.session_state.money, value=10, step=1)
+
+bet = st.number_input("掛け金を設定してください", min_value=1, max_value=st.session_state.money, value=st.session_state.pre_bet, step=1)
 if st.button("掛け金を設定"):
     if bet > st.session_state.money:
         st.error("❌ 掛け金が所持金を超えています！")
@@ -104,9 +108,15 @@ with colA:
         if next_val > cur_val:
             st.session_state.message = "✅ Correct! ➡ Next で続行"
             st.session_state.money += bet * 2
+            st.session_state.pre_bet = bet
+        elif next_val == cur_val:
+            st.session_state.message = f"➖ Same! ({st.session_state.next}) ➡ Next"
+            # 所持金変動なし
+            st.session_state.pre_bet = bet
         else:
             st.session_state.message = f"❌ Wrong! ({st.session_state.next}) ➡ Next"
             st.session_state.money -= bet
+            st.session_state.pre_bet = bet
 
 with colB:
     if st.button("🔽 Low") and not st.session_state.next:
@@ -116,9 +126,15 @@ with colB:
         if next_val < cur_val:
             st.session_state.message = "✅ Correct! ➡ Next で続行"
             st.session_state.money += bet * 2
+            st.session_state.pre_bet = bet
+        elif next_val == cur_val:
+            st.session_state.message = f"➖ Same! ({st.session_state.next}) ➡ Next"
+            # 所持金変動なし
+            st.session_state.pre_bet = bet
         else:
             st.session_state.message = f"❌ Wrong! ({st.session_state.next}) ➡ Next"
             st.session_state.money -= bet
+            st.session_state.pre_bet = bet
 
 with colC:
     if st.button("➡ Next") and st.session_state.next:
