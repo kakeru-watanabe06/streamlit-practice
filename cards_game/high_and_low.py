@@ -49,7 +49,7 @@ def generate_cards(path="cards"):
     return cards
 
 def card_value(rank):
-    if rank == "A": return 100000000000
+    if rank == "A": return 99
     if rank == "J": return 11
     if rank == "Q": return 12
     if rank == "K": return 13
@@ -72,6 +72,7 @@ st.title("🃏 High and Low Game!!")
 st.write("カードの数字が次に出るカードより高いか低いかを当ててください。")
 st.write("Aは最も高く、2が最も低いです。")
 st.write("掛け金を設定し、当たれば掛け金の2倍、外れれば掛け金を失います。")
+st.write("⚠️ダブルクリックしないと反応しないバグがありますが放置してます。")
 
 col1, col2 = st.columns(2)
 col1.image(st.session_state.cards[st.session_state.current], caption="現在のカード")
@@ -106,15 +107,15 @@ with colA:
         cur_val = card_value(st.session_state.current[:-1])
         next_val = card_value(st.session_state.next[:-1])
         if next_val > cur_val:
-            st.session_state.message = "✅ Correct! ➡ Next で続行"
+            st.session_state.message = "✅ Correct! ➡ Click Next"
             st.session_state.money += bet * 2
             st.session_state.pre_bet = bet
         elif next_val == cur_val:
-            st.session_state.message = f"➖ Same! ({st.session_state.next}) ➡ Next"
+            st.session_state.message = f"➖ Same! ({st.session_state.next}) ➡ Click Next"
             # 所持金変動なし
             st.session_state.pre_bet = bet
         else:
-            st.session_state.message = f"❌ Wrong! ({st.session_state.next}) ➡ Next"
+            st.session_state.message = f"❌ Wrong! ({st.session_state.next}) ➡ Click Next"
             st.session_state.money -= bet
             st.session_state.pre_bet = bet
 
@@ -124,15 +125,15 @@ with colB:
         cur_val = card_value(st.session_state.current[:-1])
         next_val = card_value(st.session_state.next[:-1])
         if next_val < cur_val:
-            st.session_state.message = "✅ Correct! ➡ Next で続行"
+            st.session_state.message = "✅ Correct! ➡ Click Next"
             st.session_state.money += bet * 2
             st.session_state.pre_bet = bet
         elif next_val == cur_val:
-            st.session_state.message = f"➖ Same! ({st.session_state.next}) ➡ Next"
+            st.session_state.message = f"➖ Same! ({st.session_state.next}) ➡ Click Next"
             # 所持金変動なし
             st.session_state.pre_bet = bet
         else:
-            st.session_state.message = f"❌ Wrong! ({st.session_state.next}) ➡ Next"
+            st.session_state.message = f"❌ Wrong! ({st.session_state.next}) ➡ Click Next"
             st.session_state.money -= bet
             st.session_state.pre_bet = bet
 
