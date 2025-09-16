@@ -88,7 +88,8 @@ st.markdown(f"### 所持金: {st.session_state.money} 円")
 if st.session_state.money <= 0:
     st.error("💥 所持金がなくなりました！ゲームオーバー")
     st.stop()
-
+if st.session_state.money < st.session_state.pre_bet:
+    st.session_state.pre_bet = st.session_state.money
 bet = st.number_input("掛け金を設定してください", min_value=1, max_value=st.session_state.money, value=st.session_state.pre_bet, step=1)
 if st.button("掛け金を設定"):
     if bet > st.session_state.money:
