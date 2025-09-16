@@ -7,6 +7,7 @@ from PIL import Image
 st.set_page_config(page_title="High and Low", page_icon="🃏", layout="centered")
 init_money = 100
 
+
 # トランプ画像を読み込む関数
 @st.cache_data
 def load_cards(path="cards"):
