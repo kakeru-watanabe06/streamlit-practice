@@ -1,0 +1,14 @@
+site_name: card game 
+site_url: https://kakeru-watanabe06.github.io/streamlit-practice/
+theme:
+  name: material
+nav:
+  - Home: index.md
+  - About: about.md
+  - App:
+      - High and Low: App/high_low.md
+    
+repo_url: https://github.com/kakeru-watanabe06/streamlit-practice
+extra:
+  version:
+    provider: mike
