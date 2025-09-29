@@ -1,1 +1,1 @@
-{"config":{"indexing":"full","lang":["en"],"min_search_length":3,"prebuild_index":false,"separator":"[\\s\\-]+"},"docs":[{"location":"","text":"\u521d\u3081\u306b","title":"Home"},{"location":"#_1","text":"","title":"\u521d\u3081\u306b"}]}
+{"config":{"lang":["en"],"separator":"[\\s\\-]+","pipeline":["stopWordFilter"]},"docs":[{"location":"","title":"\u521d\u3081\u306b","text":""}]}
