@@ -207,3 +207,6 @@ __marimo__/
 
 # VS Code setting
 .vscode/
+
+# MkDocs setting
+site/
